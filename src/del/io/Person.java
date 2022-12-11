@@ -1,5 +1,7 @@
 package del.io;
 
+import java.time.LocalDate;
+
 public class Person {
 
     private String firstName;
@@ -7,32 +9,35 @@ public class Person {
     private String surname;
     private char gender;
     private String PESEL;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
+    private String placeOfBirth;
     private String fathersName;
     private String mothersName;
     private Address residenceAddress;
     private Address registeredAddress;
-    private String dateOfDeath;
+    private LocalDate dateOfDeath;
 
-    public Person(String firstName, String secondName, String surname, char gender, String PESEL,
-                  String dateOfBirth, String fathersName, String mothersName, Address residenceAddress,
+    public Person(String firstName, String secondName, String surname, char gender,
+                  LocalDate dateOfBirth, String placeOfBirth, String fathersName, String mothersName, Address residenceAddress,
                   Address registeredAddress) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.surname = surname;
         this.gender = gender;
-        this.PESEL = PESEL;
         this.dateOfBirth = dateOfBirth;
+        this.placeOfBirth = placeOfBirth;
         this.fathersName = fathersName;
         this.mothersName = mothersName;
         this.residenceAddress = residenceAddress;
         this.registeredAddress = registeredAddress;
-        this.dateOfDeath = "";
+        this.dateOfDeath = null;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setPESEL(String PESEL) {
+        this.PESEL = PESEL;
     }
+
+    public String getFirstName() { return firstName; }
 
     public String getSecondName() {
         return secondName;
@@ -50,7 +55,7 @@ public class Person {
         return PESEL;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -70,7 +75,7 @@ public class Person {
         return registeredAddress;
     }
 
-    public String getDateOfDeath() {
+    public LocalDate getDateOfDeath() {
         return dateOfDeath;
     }
 
@@ -94,7 +99,9 @@ public class Person {
         this.registeredAddress = registeredAddress;
     }
 
-    public void setDateOfDeath(String dateOfDeath) {
+    public void setDateOfDeath(LocalDate dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
     }
+
+    public String getPlaceOfBirth() { return placeOfBirth; }
 }

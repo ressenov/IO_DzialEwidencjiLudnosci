@@ -1,14 +1,16 @@
 package del.io;
 
+import java.time.LocalDate;
+
 public class ArchiveEntry {
 
     protected Person oldData;
     protected Person newData;
-    protected String dateOfChange;
+    protected LocalDate dateOfChange;
     protected String personResponsible;
     protected String type;
 
-    public ArchiveEntry(Person oldData, Person newData, String dateOfChange,
+    public ArchiveEntry(Person oldData, Person newData, LocalDate dateOfChange,
                                   String personResponsible, String type) {
         this.oldData = oldData;
         this.newData = newData;
@@ -25,7 +27,7 @@ public class ArchiveEntry {
         return newData;
     }
 
-    public String getDateOfChange() {
+    public LocalDate getDateOfChange() {
         return dateOfChange;
     }
 

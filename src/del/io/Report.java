@@ -1,16 +1,18 @@
 package del.io;
 
+import java.time.LocalDate;
+
 public class Report {
 
     private int numberOfBirths;
     private int numberOfDeaths;
     private String birthToDeathRatio;
     private float meanDeathAge;
-    private String fromDate;
-    private String toDate;
-    private String dateOfCreation;
+    private LocalDate fromDate;
+    private LocalDate toDate;
+    private LocalDate dateOfCreation;
 
-    public Report(String fromDate, String toDate, String dateOfCreation) {
+    public Report(LocalDate fromDate, LocalDate toDate, LocalDate dateOfCreation) {
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.dateOfCreation = dateOfCreation;

@@ -11,15 +11,15 @@ public class DocumentManager {
         this.reports = new ArrayList<>();
     }
 
-    public Report generateReport(String fromDate, String toDate, String dateOfCreation){
-        //return ;
-    }
+//    public Report generateReport(String fromDate, String toDate, String dateOfCreation){
+//        //return ;
+//    }
 
     public void showReport (String dateOfCreation){
 
     }
 
-    public AuthenticationDocument generateAuthenticationDocument(ArchiveEntry entry){
-
-    }
+//    public AuthenticationDocument generateAuthenticationDocument(ArchiveEntry entry){
+//
+//    }
 }
