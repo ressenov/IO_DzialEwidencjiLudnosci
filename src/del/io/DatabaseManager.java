@@ -6,15 +6,12 @@ import java.util.List;
 
 public class DatabaseManager {
 
-    private List<Person> database;
-    private List<ArchiveEntry> archive;
+    private static List<Person> database = new ArrayList<>();
+    private static List<ArchiveEntry> archive = new ArrayList<>();
 
-    public DatabaseManager() {
-        this.database = new ArrayList<>();
-        this.archive = new ArrayList<>();
-    }
+    public DatabaseManager() { }
 
-    public List<ArchiveEntry> getArchive() {
+    public static List<ArchiveEntry> getArchive() {
         return archive;
     }
 
@@ -55,10 +52,10 @@ public class DatabaseManager {
 
         String month;
         if (dateOfBirth.getMonth().getValue() >= 10){
-            month = "3" + Integer.toString(dateOfBirth.getMonth().getValue() % 10);
+            month = "3" + dateOfBirth.getMonth().getValue() % 10;
         }
         else {
-            month = "2" + Integer.toString(dateOfBirth.getMonth().getValue());
+            month = "2" + dateOfBirth.getMonth().getValue();
         }
 
         PESEL += month;
@@ -77,11 +74,25 @@ public class DatabaseManager {
         return PESEL;
     }
 
-    public void printArchive(String fromDate, String toDate){
+    public void printArchive(){
         for (ArchiveEntry entry : archive) {
-            System.out.println(entry.newData.getPESEL() +" " + entry.getDateOfChange() + " " + entry.getPersonResponsible());
+            System.out.println(entry.getOldData().getPESEL() +" " + entry.getDateOfChange() + " " + entry.getPersonResponsible());
         }
 
+    }
+
+    public void printArchiveEntry(int id){
+        for (ArchiveEntry entry : archive) {
+            if (entry.getId() == id){
+                System.out.println("\nDane pierwotne:\n");
+                printPersonalInfo(entry.getOldData());
+                printPersonalInfo(entry.getNewData());
+                System.out.println("\nID zmiany: " + entry.getId() +
+                        "\nData zmiany: " + entry.getDateOfChange() +
+                        "\nOsoba odpowiedzialna: " +entry.getPersonResponsible() +
+                        "\nTyp zmiany: " +entry.getType());
+            }
+        }
     }
 
     public void addToArchive (ArchiveEntry entry){
@@ -89,7 +100,22 @@ public class DatabaseManager {
     }
 
     public void printPersonalData (Person person){
-        System.out.println("Imie: " + person.getFirstName() +
+        printPersonalInfo(person);
+
+        System.out.println("Historia zmian danych dla osoby");
+        for (ArchiveEntry entry:archive) {
+            if (entry.getOldData().getPESEL() == person.getPESEL()){
+                System.out.println("ID zmiany: " + entry.getId() +
+                        "\nData zmiany: " + entry.getDateOfChange() +
+                        "\nOsoba odpowiedzialna za zmiane: " + entry.getPersonResponsible() +
+                        "\n Typ zmiany danych: " + entry.getType() + "\n");
+            }
+
+        }
+    }
+
+    private void printPersonalInfo(Person person){
+        System.out.println("\nImie: " + person.getFirstName() +
                 "\nDrugie imie: " + person.getSecondName() +
                 "\nNazwisko: " + person.getSurname() +
                 "\nPlec: " + person.getGender() +
@@ -106,7 +132,14 @@ public class DatabaseManager {
                 "\nNumer lokalu: " + person.getRegisteredAddress().getApartamentNumber() +
                 "\nKod pocztowy: " + person.getRegisteredAddress().getPostalCode() +
                 "\nMiejscowosc: " + person.getRegisteredAddress().getTown());
-                if(!(person.getDateOfDeath() == null)) System.out.println("Data smierci:" + person.getDateOfDeath());
+        if(!(person.getDateOfDeath() == null)) System.out.println("Data smierci:" + person.getDateOfDeath() + "\n\n");
+    }
+
+    public static int getLatestID(){
+        if (archive.isEmpty())
+            return -1;
+        else
+            return archive.get(archive.size() - 1).getId();
     }
 
 }

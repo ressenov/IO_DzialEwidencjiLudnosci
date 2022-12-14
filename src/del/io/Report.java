@@ -13,6 +13,18 @@ public class Report {
     private LocalDate toDate;
     private LocalDate dateOfCreation;
 
+    public LocalDate getFromDate() {
+        return fromDate;
+    }
+
+    public LocalDate getToDate() {
+        return toDate;
+    }
+
+    public LocalDate getDateOfCreation() {
+        return dateOfCreation;
+    }
+
     public Report(LocalDate fromDate, LocalDate toDate, LocalDate dateOfCreation) {
         this.fromDate = fromDate;
         this.toDate = toDate;
@@ -40,8 +52,8 @@ public class Report {
     }
 
     private int calculateNumberOfBirths(){
-        DatabaseManager dbM = new DatabaseManager();
-        List<ArchiveEntry> archive = dbM.getArchive();
+        //DatabaseManager dbM = new DatabaseManager();
+        List<ArchiveEntry> archive = DatabaseManager.getArchive();
 
         int births = 0;
         for (ArchiveEntry entry:archive) {
@@ -52,8 +64,8 @@ public class Report {
     }
 
     private int calculateNumberOfDeaths(){
-        DatabaseManager dbM = new DatabaseManager();
-        List<ArchiveEntry> archive = dbM.getArchive();
+        //DatabaseManager dbM = new DatabaseManager();
+        List<ArchiveEntry> archive = DatabaseManager.getArchive();
 
         int deaths = 0;
         for (ArchiveEntry entry:archive) {
@@ -64,8 +76,8 @@ public class Report {
     }
 
     private float calculateMeanDeathAge(){
-        DatabaseManager dbM = new DatabaseManager();
-        List<ArchiveEntry> archive = dbM.getArchive();
+        //DatabaseManager dbM = new DatabaseManager();
+        List<ArchiveEntry> archive = DatabaseManager.getArchive();
 
         int sumOfAge = 0;
         int amount = 0;
@@ -76,7 +88,10 @@ public class Report {
             }
         }
         float meanDeathAge = sumOfAge/amount;
-        return meanDeathAge;
+        if (amount == 0)
+            return 0;
+        else
+            return meanDeathAge;
     }
 
     private String calculateBirthToDeathRatio(){
