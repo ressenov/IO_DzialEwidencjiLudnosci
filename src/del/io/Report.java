@@ -1,6 +1,7 @@
 package del.io;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Report {
 
@@ -39,19 +40,49 @@ public class Report {
     }
 
     private int calculateNumberOfBirths(){
-    return 0;
+        DatabaseManager dbM = new DatabaseManager();
+        List<ArchiveEntry> archive = dbM.getArchive();
+
+        int births = 0;
+        for (ArchiveEntry entry:archive) {
+            if(entry.getType().equals("BIRTH") && entry.getDateOfChange().isAfter(fromDate) && entry.getDateOfChange().isBefore(toDate))
+                births++;
+        }
+        return births;
     }
 
     private int calculateNumberOfDeaths(){
-        return 0;
+        DatabaseManager dbM = new DatabaseManager();
+        List<ArchiveEntry> archive = dbM.getArchive();
+
+        int deaths = 0;
+        for (ArchiveEntry entry:archive) {
+            if(entry.getType().equals("DEATH") && entry.getDateOfChange().isAfter(fromDate) && entry.getDateOfChange().isBefore(toDate))
+                deaths++;
+        }
+        return deaths;
     }
 
     private float calculateMeanDeathAge(){
-        return (float)0.0;
+        DatabaseManager dbM = new DatabaseManager();
+        List<ArchiveEntry> archive = dbM.getArchive();
+
+        int sumOfAge = 0;
+        int amount = 0;
+        for (ArchiveEntry entry:archive) {
+            if(entry.getType().equals("DEATH") && entry.getDateOfChange().isAfter(fromDate) && entry.getDateOfChange().isBefore(toDate)) {
+                amount++;
+                sumOfAge += ( entry.getNewData().getDateOfDeath().getYear() - entry.getNewData().getDateOfBirth().getYear() );
+            }
+        }
+        float meanDeathAge = sumOfAge/amount;
+        return meanDeathAge;
     }
 
     private String calculateBirthToDeathRatio(){
-        return "0:0";
+        String ratio = "";
+        ratio = Integer.toString(this.numberOfBirths) + " : " + Integer.toString(this.numberOfDeaths);
+        return ratio;
     }
 
 }

@@ -16,6 +16,20 @@ public class App {
         Person testPerson2 = new Person("imieee", "" ,"nazwiskoooo", 'M',
                 LocalDate.of(2000,10,7), "", "tata", "mama",
                 testAddress, testAddress);
+        testPerson2.setDateOfDeath(LocalDate.of(2022,12,13));
+        ArchiveEntry testEntry1 = new ArchiveEntry(testPerson,testPerson2, LocalDate.of(2022,12,13),"pr", "DEATH");
+        dbM.addToArchive(testEntry1);
+
+        testPerson2.setDateOfDeath(LocalDate.of(2032,12,13));
+        ArchiveEntry testEntry2 = new ArchiveEntry(testPerson,testPerson2, LocalDate.of(2022,12,13),"pr", "DEATH");
+        dbM.addToArchive(testEntry2);
+
+        Report testReport = new Report(LocalDate.of(2021,12,14), LocalDate.of(2022,12,14),LocalDate.of(2022,12,13));
+        System.out.println(testReport.getNumberOfBirths());
+        System.out.println(testReport.getNumberOfDeaths());
+        System.out.println(testReport.getBirthToDeathRatio());
+        System.out.println(testReport.getMeanDeathAge());
+
 //        testPerson2.setPESEL(dbM.generatePESEL(testPerson2));
 //        dbM.addNewPerson(testPerson2);
 
