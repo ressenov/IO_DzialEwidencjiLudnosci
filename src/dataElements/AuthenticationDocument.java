@@ -1,4 +1,7 @@
-package del.io;
+package dataElements;
+
+import dataElements.ArchiveEntry;
+import dataElements.Person;
 
 import java.time.LocalDate;
 

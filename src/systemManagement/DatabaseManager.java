@@ -1,4 +1,7 @@
-package del.io;
+package systemManagement;
+
+import dataElements.ArchiveEntry;
+import dataElements.Person;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,18 +18,20 @@ public class DatabaseManager {
         return archive;
     }
 
-    public void addNewPerson(Person newPerson){
+    public void addNewPerson(Person newPerson, LocalDate dateOfChange, String personResponsible){
         newPerson.setPESEL(generatePESEL(newPerson));
         database.add(newPerson);
+        addToArchive(new ArchiveEntry(newPerson, newPerson, dateOfChange, personResponsible, "BIRTH"));
     }
 
-    public void editPersonalData(Person toBeChanged, Person newData){
+    public void editPersonalData(Person toBeChanged, Person newData, LocalDate dateOfChange, String personResponisble, String type){
         toBeChanged.setFirstName(newData.getFirstName());
         toBeChanged.setSecondName(newData.getSecondName());
         toBeChanged.setSurname(newData.getSurname());
         toBeChanged.setResidenceAddress(newData.getResidenceAddress());
         toBeChanged.setRegisteredAddress(newData.getRegisteredAddress());
 
+        addToArchive(new ArchiveEntry(toBeChanged, newData, dateOfChange,personResponisble, type));
     }
 
     public Person searchPerson(String PESEL){
@@ -104,7 +109,7 @@ public class DatabaseManager {
 
         System.out.println("Historia zmian danych dla osoby");
         for (ArchiveEntry entry:archive) {
-            if (entry.getOldData().getPESEL() == person.getPESEL()){
+            if (entry.getOldData().getPESEL().equals(person.getPESEL())){
                 System.out.println("ID zmiany: " + entry.getId() +
                         "\nData zmiany: " + entry.getDateOfChange() +
                         "\nOsoba odpowiedzialna za zmiane: " + entry.getPersonResponsible() +

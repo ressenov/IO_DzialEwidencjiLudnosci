@@ -1,4 +1,8 @@
-package del.io;
+package systemManagement;
+
+import dataElements.AuthenticationDocument;
+import dataElements.Person;
+import dataElements.Report;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +22,12 @@ public class DocumentManager {
        return report;
     }
 
+    public AuthenticationDocument generateAuthenticationDocument(Person oldData, Person newData, LocalDate dateOfChange, String personResponsible, String type){
+        AuthenticationDocument authenticationDocument = new AuthenticationDocument(oldData, newData, dateOfChange, personResponsible, type);
+        authenticationDocuments.add(authenticationDocument);
+        return authenticationDocument;
+    }
+
     public void showReport (LocalDate dateOfCreation){
         for (Report report: reports) {
             if (report.getDateOfCreation().equals(dateOfCreation)) {
@@ -34,18 +44,11 @@ public class DocumentManager {
 
     public void showReport (){
         for (Report report: reports) {
-
                 System.out.println("\nData utworzenia: " + report.getDateOfCreation() +
                         "\nData poczatkowa: " + report.getFromDate() +
                         "\nData koncowa: " + report.getToDate() + "\n");
 
         }
-    }
-
-    public AuthenticationDocument generateAuthenticationDocument(ArchiveEntry entry){
-        AuthenticationDocument authenticationDocument = new AuthenticationDocument(entry.getOldData(), entry.getNewData(), entry.getDateOfChange(), entry.getPersonResponsible(), entry.getType());
-        authenticationDocuments.add(authenticationDocument);
-        return authenticationDocument;
     }
 
     private void printEntryDetails(){}

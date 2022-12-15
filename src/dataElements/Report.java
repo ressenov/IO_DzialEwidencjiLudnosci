@@ -1,4 +1,6 @@
-package del.io;
+package dataElements;
+
+import systemManagement.DatabaseManager;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -96,7 +98,7 @@ public class Report {
 
     private String calculateBirthToDeathRatio(){
         String ratio = "";
-        ratio = Integer.toString(this.numberOfBirths) + " : " + Integer.toString(this.numberOfDeaths);
+        ratio = numberOfBirths + " : " + numberOfDeaths;
         return ratio;
     }
 
