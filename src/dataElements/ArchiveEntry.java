@@ -6,12 +6,12 @@ import java.time.LocalDate;
 
 public class ArchiveEntry {
 
-    private int id;
-    private Person oldData;
-    private Person newData;
-    private LocalDate dateOfChange;
-    private String personResponsible;
-    private String type;
+    protected int id;
+    protected Person oldData;
+    protected Person newData;
+    protected LocalDate dateOfChange;
+    protected String personResponsible;
+    protected String type;
 
     public ArchiveEntry(Person oldData, Person newData, LocalDate dateOfChange,
                                   String personResponsible, String type) {

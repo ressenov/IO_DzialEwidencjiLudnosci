@@ -54,7 +54,6 @@ public class Report {
     }
 
     private int calculateNumberOfBirths(){
-        //DatabaseManager dbM = new DatabaseManager();
         List<ArchiveEntry> archive = DatabaseManager.getArchive();
 
         int births = 0;
@@ -66,7 +65,6 @@ public class Report {
     }
 
     private int calculateNumberOfDeaths(){
-        //DatabaseManager dbM = new DatabaseManager();
         List<ArchiveEntry> archive = DatabaseManager.getArchive();
 
         int deaths = 0;
@@ -78,7 +76,6 @@ public class Report {
     }
 
     private float calculateMeanDeathAge(){
-        //DatabaseManager dbM = new DatabaseManager();
         List<ArchiveEntry> archive = DatabaseManager.getArchive();
 
         int sumOfAge = 0;

@@ -11,8 +11,12 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class App {
+    private DocumentManager documentManager;
+    private DatabaseManager databaseManager;
+
 
     public static void main(String[] args) {
+        App app = new App();
         boolean loop = true;
         while (loop) {
             System.out.println("1.Pokaz baze danych\n2.Zarzadzaj baza danych\n3.Wygeneruj raport\n4.Pokaz baze raportow\nDowlny klawisz aby wyjsc");
@@ -20,16 +24,16 @@ public class App {
             int choice = scanner.nextInt();
             switch (choice){
                 case 1:
-                    showDatabase();
+                    app.showDatabase();
                     break;
                 case 2:
-                    editPersonalData();
+                    app.editPersonalData();
                     break;
                 case 3:
-                    generateReport();
+                    app.generateReport();
                     break;
                 case 4:
-                    showReports();
+                    app.showReports();
                     break;
                 case 5:
                     loop = false;
@@ -38,8 +42,8 @@ public class App {
 
     }
 
-    public static void showDatabase(){
-        DatabaseManager databaseManager = new DatabaseManager();
+    public void showDatabase(){
+        databaseManager = new DatabaseManager();
         Scanner scanner = new Scanner(System.in);
         System.out.println("1.Cała baza danych\n2.Dane osoby z historia edycji");
         int choice = scanner.nextInt();
@@ -49,13 +53,13 @@ public class App {
         else if (choice == 2){
             System.out.println("Podaj numer PESEL osoby: ");
             String PESEL = scanner.nextLine();
-            databaseManager.printPersonalData(databaseManager.searchPerson(PESEL));
+            databaseManager.printFullPersonalData(databaseManager.searchPerson(PESEL));
         }
     }
 
-    public static void editPersonalData(){
-        DatabaseManager databaseManager = new DatabaseManager();
-        DocumentManager documentManager = new DocumentManager();
+    public void editPersonalData(){
+        databaseManager = new DatabaseManager();
+        documentManager = new DocumentManager();
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("1.Zglos zgon osoby\n2.Zmien dane osoby\n3.Urodzenie\n");
@@ -240,9 +244,9 @@ public class App {
 
     }
 
-    public static void generateReport(){
-        DocumentManager documentManager = new DocumentManager();
+    public void generateReport(){
         Scanner scanner = new Scanner(System.in);
+        documentManager = new DocumentManager();
 
         System.out.println("\nCzy nastapil czas na wygenerowanie kolejnego raportu?");
         boolean didTimePass = scanner.nextBoolean();
@@ -277,13 +281,14 @@ public class App {
         }
     }
 
-    public static void showReports(){
-        DocumentManager documentManager = new DocumentManager();
+    public void showReports(){
         Scanner scanner = new Scanner(System.in);
+        documentManager = new DocumentManager();
+
         System.out.println("1.Wszystkie raporty\n2.Pełny raport z określonego dnia");
         int choice = scanner.nextInt();
         if (choice == 1){
-            documentManager.showReport();
+            documentManager.showReports();
         }
         else if (choice == 2){
             System.out.println("\nWprowadz rok wygenerowania raportu:");

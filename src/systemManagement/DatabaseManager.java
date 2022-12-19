@@ -79,32 +79,32 @@ public class DatabaseManager {
         return PESEL;
     }
 
-    public void printArchive(){
-        for (ArchiveEntry entry : archive) {
-            System.out.println(entry.getOldData().getPESEL() +" " + entry.getDateOfChange() + " " + entry.getPersonResponsible());
-        }
-
-    }
-
-    public void printArchiveEntry(int id){
-        for (ArchiveEntry entry : archive) {
-            if (entry.getId() == id){
-                System.out.println("\nDane pierwotne:\n");
-                printPersonalInfo(entry.getOldData());
-                printPersonalInfo(entry.getNewData());
-                System.out.println("\nID zmiany: " + entry.getId() +
-                        "\nData zmiany: " + entry.getDateOfChange() +
-                        "\nOsoba odpowiedzialna: " +entry.getPersonResponsible() +
-                        "\nTyp zmiany: " +entry.getType());
-            }
-        }
-    }
+//    public void printArchive(){
+//        for (ArchiveEntry entry : archive) {
+//            System.out.println(entry.getOldData().getPESEL() +" " + entry.getDateOfChange() + " " + entry.getPersonResponsible());
+//        }
+//
+//    }
+//
+//    public void printArchiveEntry(int id){
+//        for (ArchiveEntry entry : archive) {
+//            if (entry.getId() == id){
+//                System.out.println("\nDane pierwotne:\n");
+//                printPersonalInfo(entry.getOldData());
+//                printPersonalInfo(entry.getNewData());
+//                System.out.println("\nID zmiany: " + entry.getId() +
+//                        "\nData zmiany: " + entry.getDateOfChange() +
+//                        "\nOsoba odpowiedzialna: " +entry.getPersonResponsible() +
+//                        "\nTyp zmiany: " +entry.getType());
+//            }
+//        }
+//    }
 
     public void addToArchive (ArchiveEntry entry){
         archive.add(entry);
     }
 
-    public void printPersonalData (Person person){
+    public void printFullPersonalData(Person person){
         printPersonalInfo(person);
 
         System.out.println("Historia zmian danych dla osoby");

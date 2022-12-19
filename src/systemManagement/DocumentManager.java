@@ -22,7 +22,8 @@ public class DocumentManager {
        return report;
     }
 
-    public AuthenticationDocument generateAuthenticationDocument(Person oldData, Person newData, LocalDate dateOfChange, String personResponsible, String type){
+    public AuthenticationDocument generateAuthenticationDocument(Person oldData, Person newData, LocalDate dateOfChange,
+                                                                 String personResponsible, String type){
         AuthenticationDocument authenticationDocument = new AuthenticationDocument(oldData, newData, dateOfChange, personResponsible, type);
         authenticationDocuments.add(authenticationDocument);
         return authenticationDocument;
@@ -42,7 +43,7 @@ public class DocumentManager {
         }
     }
 
-    public void showReport (){
+    public void showReports(){
         for (Report report: reports) {
                 System.out.println("\nData utworzenia: " + report.getDateOfCreation() +
                         "\nData poczatkowa: " + report.getFromDate() +
@@ -51,5 +52,4 @@ public class DocumentManager {
         }
     }
 
-    private void printEntryDetails(){}
 }
